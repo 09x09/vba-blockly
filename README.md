@@ -1,3 +1,3 @@
 # vba blockly
 
-https://github.com/09x09/vba-blockly/master/blockly/tests/playground.html
+http://htmlpreview.github.com/?https://github.com/09x09/vba-blockly/blob/master/blockly/tests/playground.html

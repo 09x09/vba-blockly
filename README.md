@@ -1,9 +1,16 @@
-# vba blockly
+# visual vba - work in progress
 
-modified python generators to generate VBA code
+Google blockly based visual editor for VBA
+
 ---
-Save the repo and go to `blockly` -> `tests` -> `playground`
 
-Modules which generate correct VBA code as of 29/7/18
-- logic
-- variables
+#### How to use:
+
+Download/clone
+
+```
+$git clone https://github.com/09x09/vba-blockly.git
+```
+
+Open `playground.html`
+

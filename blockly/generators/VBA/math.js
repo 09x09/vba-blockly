@@ -78,7 +78,6 @@ Blockly.VBA['math_single'] = function(block) {
         Blockly.VBA.ORDER_UNARY_SIGN) || '0';
     return ['-' + code, Blockly.VBA.ORDER_UNARY_SIGN];
   }
-  Blockly.VBA.definitions_['import_math'] = 'import math';
   if (operator == 'SIN' || operator == 'COS' || operator == 'TAN') {
     arg = Blockly.VBA.valueToCode(block, 'NUM',
         Blockly.VBA.ORDER_MULTIPLICATIVE) || '0';
@@ -99,13 +98,13 @@ Blockly.VBA['math_single'] = function(block) {
       code = 'WorksheetFunction.LN(' + arg + ')';
       break;
     case 'LOG10':
-      code = '10 ^' + arg;
+      code = 'WorksheetFunction.Log(' + arg +')';
       break;
     case 'EXP':
       code = 'Exp(' + arg + ')';
       break;
     case 'POW10':
-      code = '10 ^' + arg;
+      code = '10 ^ ' + arg;
       break;
     case 'ROUND':
       code = 'Round(' + arg + ')';
@@ -117,13 +116,16 @@ Blockly.VBA['math_single'] = function(block) {
       code = 'WorksheetFunction.RoundDown(' + arg + ')';
       break;
     case 'SIN':
-      code = 'Sin(' + arg + ')';
+	  Blockly.VBA.definitions_['pi'] = 'Const pi = 3.14159265358979';
+      code = 'Sin(' + arg + '* pi/ 180)';
       break;
     case 'COS':
-      code = 'Cos(' + arg + ')';
+	  Blockly.VBA.definitions_['pi'] = 'Const pi = 3.14159265358979';
+      code = 'Cos(' + arg + '* pi/ 180)';
       break;
     case 'TAN':
-      code = 'Tan(' + arg + ')';
+	  Blockly.VBA.definitions_['pi'] = 'Const pi = 3.14159265358979';
+      code = 'Tan(' + arg + '* pi/ 180)';
       break;
   }
   if (code) {
@@ -133,13 +135,16 @@ Blockly.VBA['math_single'] = function(block) {
   // wrapping the code.
   switch (operator) {
     case 'ASIN':
-      code = 'math.asin(' + arg + ') / math.pi * 180';
+	  Blockly.VBA.definitions_['pi'] = 'Const pi = 3.14159265358979';
+      code = 'WorksheetFunction.Asin(' + arg + ') / math.pi * 180';
       break;
     case 'ACOS':
-      code = 'math.acos(' + arg + ') / math.pi * 180';
+	  Blockly.VBA.definitions_['pi'] = 'Const pi = 3.14159265358979';
+      code = 'WorksheetFunction.Acos(' + arg + ') / math.pi * 180';
       break;
     case 'ATAN':
-      code = 'math.atan(' + arg + ') / math.pi * 180';
+	  Blockly.VBA.definitions_['pi'] = 'Const pi = 3.14159265358979';
+      code = 'WorksheetFunction.Atan(' + arg + ') / math.pi * 180';
       break;
     default:
       throw 'Unknown math operator: ' + operator;
@@ -150,18 +155,22 @@ Blockly.VBA['math_single'] = function(block) {
 Blockly.VBA['math_constant'] = function(block) {
   // Constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.
   var CONSTANTS = {
-    'PI': ['math.pi', Blockly.VBA.ORDER_MEMBER],
-    'E': ['math.e', Blockly.VBA.ORDER_MEMBER],
-    'GOLDEN_RATIO': ['(1 + math.sqrt(5)) / 2',
+    'PI': ['pi', Blockly.VBA.ORDER_MEMBER],
+    'E': ['e', Blockly.VBA.ORDER_MEMBER],
+    'GOLDEN_RATIO': ['(1 + Sqr(5)) / 2',
                      Blockly.VBA.ORDER_MULTIPLICATIVE],
-    'SQRT2': ['math.sqrt(2)', Blockly.VBA.ORDER_MEMBER],
-    'SQRT1_2': ['math.sqrt(1.0 / 2)', Blockly.VBA.ORDER_MEMBER],
+    'SQRT2': ['Sqr(2)', Blockly.VBA.ORDER_MEMBER],
+    'SQRT1_2': ['Sqr(1.0 / 2)', Blockly.VBA.ORDER_MEMBER],
     'INFINITY': ['float(\'inf\')', Blockly.VBA.ORDER_ATOMIC]
   };
   var constant = block.getFieldValue('CONSTANT');
-  if (constant != 'INFINITY') {
-    Blockly.VBA.definitions_['import_math'] = 'import math';
-  }
+  if (constant === 'PI'){
+	Blockly.VBA.definitions_['pi'] = 'Const pi = 3.14159265358979'  ;
+  
+  }  else if (constant === 'E'){
+	Blockly.VBA.definitions_['e'] = 'Const pi = 2.71828182845'  ;
+  };
+
   return CONSTANTS[constant];
 };
 
@@ -202,13 +211,13 @@ Blockly.VBA['math_number_property'] = function(block) {
   }
   switch (dropdown_property) {
     case 'EVEN':
-      code = number_to_check + ' % 2 == 0';
+      code = number_to_check + ' % 2 = 0';
       break;
     case 'ODD':
-      code = number_to_check + ' % 2 == 1';
+      code = number_to_check + ' % 2 = 1';
       break;
     case 'WHOLE':
-      code = number_to_check + ' % 1 == 0';
+      code = number_to_check + ' % 1 = 0';
       break;
     case 'POSITIVE':
       code = number_to_check + ' > 0';
@@ -223,7 +232,7 @@ Blockly.VBA['math_number_property'] = function(block) {
       if (!divisor || divisor == '0') {
         return ['False', Blockly.VBA.ORDER_ATOMIC];
       }
-      code = number_to_check + ' % ' + divisor + ' == 0';
+      code = number_to_check + ' % ' + divisor + ' = 0';
       break;
   }
   return [code, Blockly.VBA.ORDER_RELATIONAL];
@@ -367,17 +376,15 @@ Blockly.VBA['math_constrain'] = function(block) {
 
 Blockly.VBA['math_random_int'] = function(block) {
   // Random integer between [X] and [Y].
-  Blockly.VBA.definitions_['import_random'] = 'import random';
   var argument0 = Blockly.VBA.valueToCode(block, 'FROM',
       Blockly.VBA.ORDER_NONE) || '0';
   var argument1 = Blockly.VBA.valueToCode(block, 'TO',
       Blockly.VBA.ORDER_NONE) || '0';
-  var code = 'random.randint(' + argument0.trim() + ', ' + argument1.trim() + ')';
-  return [code, Blockly.VBA.ORDER_FUNCTION_CALL];
+  var code = 'Int ((' + argument0.trim() + ' - ' + argument1.trim() + ' + 1)*Rnd + ' + argument0.trim() + ')';
+  return [code, Blockly.VBA.ORDER_ATOMIC];
 };
 
 Blockly.VBA['math_random_float'] = function(block) {
   // Random fraction between 0 and 1.
-  Blockly.VBA.definitions_['import_random'] = 'import random';
-  return ['random.random()', Blockly.VBA.ORDER_FUNCTION_CALL];
+  return ['Rnd()', Blockly.VBA.ORDER_ATOMIC];
 };

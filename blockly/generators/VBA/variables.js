@@ -32,8 +32,7 @@ goog.require('Blockly.VBA');
 Blockly.VBA['variables_get'] = function(block) {
   // Variable getter.
   var code = Blockly.VBA.variableDB_.getName(block.getFieldValue('VAR'),
-      Blockly.Variables.NAME_TYPE);
-  alert(code);
+      Blockly.Variables.NAME_TYPE); 
   return [code, Blockly.VBA.ORDER_ATOMIC];
 };
 

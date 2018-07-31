@@ -50,7 +50,7 @@ Blockly.Python['controls_repeat_ext'] = function(block) {
   var loopVar = Blockly.Python.variableDB_.getDistinctName(
       'count', Blockly.Variables.NAME_TYPE);
   var code = 'for ' + loopVar + ' in range(' + repeats + '):\n' + branch;
-  return code;
+  return code + 'Next ' + loopVar + '\n';
 };
 
 Blockly.Python['controls_repeat'] = Blockly.Python['controls_repeat_ext'];

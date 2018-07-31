@@ -58,7 +58,7 @@ Blockly.VBA['controls_ifelse'] = Blockly.VBA['controls_if'];
 Blockly.VBA['logic_compare'] = function(block) {
   // Comparison operator.
   var OPERATORS = {
-    'EQ': '==',
+    'EQ': '=',
     'NEQ': '<>',
     'LT': '<',
     'LTE': '<=',
@@ -75,7 +75,7 @@ Blockly.VBA['logic_compare'] = function(block) {
 
 Blockly.VBA['logic_operation'] = function(block) {
   // Operations 'and', 'or'.
-  var operator = (block.getFieldValue('OP') == 'AND') ? 'and' : 'or';
+  var operator = (block.getFieldValue('OP') == 'AND') ? 'AND' : 'OR';
   var order = (operator == 'and') ? Blockly.VBA.ORDER_LOGICAL_AND :
       Blockly.VBA.ORDER_LOGICAL_OR;
   var argument0 = Blockly.VBA.valueToCode(block, 'A', order);
@@ -102,7 +102,7 @@ Blockly.VBA['logic_negate'] = function(block) {
   // Negation.
   var argument0 = Blockly.VBA.valueToCode(block, 'BOOL',
       Blockly.VBA.ORDER_LOGICAL_NOT) || 'True';
-  var code = 'not ' + argument0;
+  var code = 'NOT ' + argument0;
   return [code, Blockly.VBA.ORDER_LOGICAL_NOT];
 };
 
@@ -114,7 +114,7 @@ Blockly.VBA['logic_boolean'] = function(block) {
 
 Blockly.VBA['logic_null'] = function(block) {
   // Null data type.
-  return ['None', Blockly.VBA.ORDER_ATOMIC];
+  return ['Nothing', Blockly.VBA.ORDER_ATOMIC];
 };
 
 Blockly.VBA['logic_ternary'] = function(block) {

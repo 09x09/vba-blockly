@@ -193,29 +193,29 @@ Blockly.VBA['text_getSubstring'] = function(block) {
 Blockly.VBA['text_changeCase'] = function(block) {
   // Change capitalization.
   var OPERATORS = {
-    'UPPERCASE': '.upper()',
-    'LOWERCASE': '.lower()',
-    'TITLECASE': '.title()'
+    'UPPERCASE': 'vbUpperCase',
+    'LOWERCASE': 'vbLowerCase',
+    'TITLECASE': '.vbProperCase'
   };
   var operator = OPERATORS[block.getFieldValue('CASE')];
   var text = Blockly.VBA.valueToCode(block, 'TEXT',
       Blockly.VBA.ORDER_MEMBER) || '\'\'';
-  var code = text + operator;
+  var code = 'StrConv(' + text + ', ' + operator + ')\n';
   return [code, Blockly.VBA.ORDER_FUNCTION_CALL];
 };
 
 Blockly.VBA['text_trim'] = function(block) {
   // Trim spaces.
   var OPERATORS = {
-    'LEFT': '.lstrip()',
-    'RIGHT': '.rstrip()',
-    'BOTH': '.strip()'
+    'LEFT': 'LTrim(',
+    'RIGHT': 'RTrim(',
+    'BOTH': 'Trim('
   };
   var operator = OPERATORS[block.getFieldValue('MODE')];
   var text = Blockly.VBA.valueToCode(block, 'TEXT',
       Blockly.VBA.ORDER_MEMBER) || '\'\'';
-  var code = text + operator;
-  return [code, Blockly.VBA.ORDER_FUNCTION_CALL];
+  var code = operator + text + ')\n';
+  return [code, Blockly.VBA.ORDER_ATOMIC];
 };
 
 Blockly.VBA['text_print'] = function(block) {

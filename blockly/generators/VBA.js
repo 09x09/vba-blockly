@@ -202,7 +202,7 @@ Blockly.VBA.quote_ = function(string) {
                  .replace(/\%/g, '\\%');
 
   // Follow the CVBA behaviour of repr() for a non-byte string.
-  var quote = '\'';
+  var quote = '\"';
   if (string.indexOf('\'') !== -1) {
     if (string.indexOf('"') === -1) {
       quote = '"';

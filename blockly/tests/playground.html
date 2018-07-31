@@ -11,6 +11,8 @@
 <script src="../blocks/text.js"></script>
 <script src="../blocks/lists.js"></script>
 <script src="../blocks/colour.js"></script>
+<script src="../blocks/cells.js"></script>
+<script src="../blocks/worksheet.js"></script>
 <script src="../blocks/variables.js"></script>
 <script src="../blocks/variables_dynamic.js"></script>
 <script src="../blocks/procedures.js"></script>
@@ -22,6 +24,9 @@
 <script src="../generators/VBA/variables_dynamic.js"></script>
 <script src="../generators/VBA/lists.js"></script>
 <script src="../generators/VBA/colour.js"></script>
+<script src="../generators/VBA/cells.js"></script>
+<script src="../generators/VBA/text.js"></script>
+<script src="../generators/VBA/worksheet.js"></script>
 <script src="blocks/test_blocks.js"></script>
 <script>
 'use strict';
@@ -573,8 +578,58 @@ h1 {
     <category name="Functions" colour="290" custom="PROCEDURE"></category>
 	<sep></sep>
 	<category name="Workbook" colour="60"></category>
-	<category name="Worksheet" colour="60"></category>
-	<category name="Cells" colour="60"></category>
+	<category name="Worksheet" colour="60">
+	<block type="ws"></block>
+	<block type="activate"></block>
+	<block type="printout"></block>
+	<block type="print_copies">
+		<value name="COPY">
+		  <shadow type="math_number">
+          <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="START_PAGE">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+		</value>	
+        <value name="END_PAGE">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+		</value>	
+	</block>
+	</category>
+	<category name="Cells" colour="60">
+	<block type="get_cell">
+		<value name="ROW">
+		  <shadow type="math_number">
+          <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="COL">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+		</value>
+	</block>
+	<block type="set_cell">
+		<value name="ROW">
+		  <shadow type="math_number">
+          <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="COL">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+		</value>
+	</block>
+	<block type="value"></block>
+	<block type="formula"></block>
+	<block type="formulaR1C1"></block>
+	<block type="font"></block>
+	</category>
   </xml>
 
 

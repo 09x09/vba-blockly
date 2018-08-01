@@ -107,4 +107,27 @@ Blockly.defineBlocksWithJsonArray([
 	  "tooltip": "",
 	  "helpUrl": ""
 	},
+	{
+	  "type": "colour",
+	  "message0": "Color",
+	  "output": null,
+	  "colour": 0,
+	  "tooltip": "",
+	  "helpUrl": ""
+	},
+	{
+	  "type": "fill",
+	  "message0": "%1",
+	  "args0": [
+		{
+		  "type": "field_colour",
+		  "name": "COL",
+		  "colour": "#ff0000"
+		}
+	  ],
+	  "output": null,
+	  "colour": 0,
+	  "tooltip": "",
+	  "helpUrl": ""
+	},
 ]);

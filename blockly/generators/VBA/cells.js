@@ -46,3 +46,19 @@ Blockly.VBA['font'] = function(block) {
   var code = '.Font.' + dropdown_opt;
   return [code, Blockly.VBA.ORDER_ATOMIC];
 };
+
+Blockly.VBA['colour'] = function(block) {
+  var code = '.Interior.Color' 
+  return [code, Blockly.VBA.ORDER_ATOMIC];
+};
+
+Blockly.VBA['fill'] = function(block) {
+  var colour_col = block.getFieldValue('COL');
+  //convert to RGB
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(colour_col)
+  var r = parseInt(result[1], 16);
+  var g =  parseInt(result[2], 16);
+  var b = parseInt(result[3], 16);
+  var code = 'RGB(' + r +', ' + g + ', ' + b + ')';
+  return [code, Blockly.VBA.ORDER_ATOMIC];
+};

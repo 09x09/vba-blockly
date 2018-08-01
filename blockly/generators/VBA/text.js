@@ -117,19 +117,19 @@ Blockly.VBA['text_charAt'] = function(block) {
       Blockly.VBA.ORDER_MEMBER) || '\'\'';
   switch (where) {
     case 'FIRST':
-      var code = text + '[0]';
-      return [code, Blockly.VBA.ORDER_MEMBER];
+      var code = 'Left(' + text + ', 1)';
+      return [code, Blockly.VBA.ORDER_ATOMIC];
     case 'LAST':
-      var code = text + '[-1]';
-      return [code, Blockly.VBA.ORDER_MEMBER];
+      var code = 'Right(' + text + ', 1)';
+      return [code, Blockly.VBA.ORDER_ATOMIC];
     case 'FROM_START':
-      var at = Blockly.VBA.getAdjustedInt(block, 'AT');
-      var code = text + '[' + at + ']';
-      return [code, Blockly.VBA.ORDER_MEMBER];
+      var at = Blockly.VBA.valueToCode(block, 'AT', Blockly.VBA.ORDER_NONE);
+      var code = 'Left(' + text + ', ' + at + ')';
+      return [code, Blockly.VBA.ORDER_ATOMIC];
     case 'FROM_END':
-      var at = Blockly.VBA.getAdjustedInt(block, 'AT', 1, true);
-      var code = text + '[' + at + ']';
-      return [code, Blockly.VBA.ORDER_MEMBER];
+      var at = Blockly.VBA.valueToCode(block, 'AT', Blockly.VBA.ORDER_NONE);
+      var code = 'Right(' + text + ', ' + at + ')';
+      return [code, Blockly.VBA.ORDER_ATOMIC];
     case 'RANDOM':
       Blockly.VBA.definitions_['import_random'] = 'import random';
       var functionName = Blockly.VBA.provideFunction_(
@@ -275,6 +275,6 @@ Blockly.VBA['text_replace'] = function(block) {
 Blockly.VBA['text_reverse'] = function(block) {
   var text = Blockly.VBA.valueToCode(block, 'TEXT',
       Blockly.VBA.ORDER_MEMBER) || '\'\'';
-  var code = text + '[::-1]';
+  var code = 'StrReverse(' + text + ')';
   return [code, Blockly.VBA.ORDER_MEMBER];
 };

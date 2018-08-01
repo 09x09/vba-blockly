@@ -65,5 +65,21 @@ Blockly.defineBlocksWithJsonArray([
 	  "colour": 0,
 	  "tooltip": "",
 	  "helpUrl": ""
+	},
+	{
+	  "type": "active_sheet",
+	  "message0": "Get property or method %1 of active sheet",
+	  "args0": [
+		{
+		  "type": "input_value",
+		  "name": "PROP"
+		}
+	  ],
+	  "inputsInline": true,
+	  "previousStatement": null,
+	  "nextStatement": null,
+	  "colour": 60,
+	  "tooltip": "",
+	  "helpUrl": ""
 	},	
 ]);

@@ -28,3 +28,9 @@ Blockly.VBA['print_copies'] = function(block) {
   var code = '.PrintOut From:=' +  value_start_page + ' ,To:=' + value_end_page + ' ,Copies:=' + value_copy + '\n';
   return [code, Blockly.VBA.ORDER_ATOMIC];
 };
+
+Blockly.VBA['active_sheet'] = function(block) {
+  var value_prop = Blockly.VBA.valueToCode(block, 'PROP', Blockly.VBA.ORDER_ATOMIC);
+    var code = 'ActiveSheet.' + value_name;
+  return code;
+};

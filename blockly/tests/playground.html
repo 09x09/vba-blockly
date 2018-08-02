@@ -493,13 +493,6 @@ h1 {
           </block>
         </value>
       </block>
-      <block type="text_getSubstring">
-        <value name="STRING">
-          <block type="variables_get">
-            <field name="VAR">text</field>
-          </block>
-        </value>
-      </block>
       <block type="text_changeCase">
         <value name="TEXT">
           <shadow type="text">
@@ -561,6 +554,8 @@ h1 {
 	<block type="ws"></block>
 	<block type="active_sheet"></block>
 	<block type="activate"></block>
+	<block type="range_get"></block>
+	<block type="range_set"></block>
 	<block type="printout"></block>
 	<block type="print_copies">
 		<value name="COPY">

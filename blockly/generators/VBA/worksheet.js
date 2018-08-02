@@ -34,3 +34,19 @@ Blockly.VBA['active_sheet'] = function(block) {
     var code = 'ActiveSheet.' + value_name;
   return code;
 };
+
+Blockly.VBA['range_get'] = function(block) {
+  var value_name = Blockly.VBA.valueToCode(block, 'NAME', Blockly.VBA.ORDER_ATOMIC);
+  var text_range = block.getFieldValue('RANGE');
+  // TODO: Assemble VBA into code variable.
+  var code = 'Range(\"' + text_range + '\")' + value_name ;
+  return [code, Blockly.VBA.ORDER_ATOMIC];
+};
+
+Blockly.VBA['range_set'] = function(block) {
+  var value_name = Blockly.VBA.valueToCode(block, 'NAME', Blockly.VBA.ORDER_ATOMIC);
+  var text_range = block.getFieldValue('RANGE');
+  var value_value = Blockly.VBA.valueToCode(block, 'VALUE', Blockly.VBA.ORDER_ATOMIC);
+  var code = 'Range(\"' + text_range + '\")' + value_name + ' = ' + value_value;
+  return [code, Blockly.VBA.ORDER_ATOMIC];
+};

@@ -81,5 +81,52 @@ Blockly.defineBlocksWithJsonArray([
 	  "colour": 60,
 	  "tooltip": "",
 	  "helpUrl": ""
+	},
+	{
+	  "type": "range_get",
+	  "message0": "Get property or method  %1 from Range %2",
+	  "args0": [
+		{
+		  "type": "input_value",
+		  "name": "NAME"
+		},
+		{
+		  "type": "field_input",
+		  "name": "RANGE",
+		  "text": "A1:A2"
+		}
+	  ],
+	  "inputsInline": true,
+	  "output": null,
+	  "colour": 230,
+	  "tooltip": "",
+	  "helpUrl": ""
+	},
+	{
+	  "type": "range_set",
+	  "message0": "Set property or method  %1 from Range %2 %3 to value %4",
+	  "args0": [
+		{
+		  "type": "input_value",
+		  "name": "NAME"
+		},
+		{
+		  "type": "field_input",
+		  "name": "RANGE",
+		  "text": "A1:A2"
+		},
+		{
+		  "type": "input_dummy"
+		},
+		{
+		  "type": "input_value",
+		  "name": "VALUE"
+		}
+	  ],
+	  "inputsInline": true,
+	  "output": null,
+	  "colour": 230,
+	  "tooltip": "",
+	  "helpUrl": ""
 	},	
 ]);

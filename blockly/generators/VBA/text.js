@@ -76,22 +76,22 @@ Blockly.VBA['text_append'] = function(block) {
       Blockly.Variables.NAME_TYPE);
   var value = Blockly.VBA.valueToCode(block, 'TEXT',
       Blockly.VBA.ORDER_NONE) || '\'\'';
-  return varName + ' = str(' + varName + ') + str(' + value + ')\n';
+  return varName + ' = CStr(' + varName + ') + CStr(' + value + ')\n';
 };
 
 Blockly.VBA['text_length'] = function(block) {
   // Is the string null or array empty?
   var text = Blockly.VBA.valueToCode(block, 'VALUE',
       Blockly.VBA.ORDER_NONE) || '\'\'';
-  return ['len(' + text + ')', Blockly.VBA.ORDER_FUNCTION_CALL];
+  return ['Len(' + text + ')', Blockly.VBA.ORDER_FUNCTION_CALL];
 };
 
 Blockly.VBA['text_isEmpty'] = function(block) {
   // Is the string null or array empty?
   var text = Blockly.VBA.valueToCode(block, 'VALUE',
       Blockly.VBA.ORDER_NONE) || '\'\'';
-  var code = 'not len(' + text + ')';
-  return [code, Blockly.VBA.ORDER_LOGICAL_NOT];
+  var code = text + '= \"\"';
+  return [code, Blockly.VBA.ORDER_ATOMIC];
 };
 
 Blockly.VBA['text_indexOf'] = function(block) {
@@ -102,9 +102,9 @@ Blockly.VBA['text_indexOf'] = function(block) {
       Blockly.VBA.ORDER_NONE) || '\'\'';
   var text = Blockly.VBA.valueToCode(block, 'VALUE',
       Blockly.VBA.ORDER_MEMBER) || '\'\'';
-  var code = text + '.' + operator + '(' + substring + ')';
+  var code = 'InStr(' + text + ','  +  substring + ')';
   if (block.workspace.options.oneBasedIndex) {
-    return [code + ' + 1', Blockly.VBA.ORDER_ADDITIVE];
+    return [code, Blockly.VBA.ORDER_ATOMIC];
   }
   return [code, Blockly.VBA.ORDER_FUNCTION_CALL];
 };

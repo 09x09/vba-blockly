@@ -186,7 +186,7 @@ Blockly.VBA['text_getSubstring'] = function(block) {
     default:
       throw 'Unhandled option (text_getSubstring)';
   }
-  var code = text + '[' + at1 + ' : ' + at2 + ']';
+  var code = 'Mid(' + text + ', ' + at1 + ' : ' + at2 + ']';
   return [code, Blockly.VBA.ORDER_MEMBER];
 };
 
